@@ -18,6 +18,31 @@ abstract class Placement(canvas : Canvas) {
 
 */
 
+
+/* Utility class for mapping between "blocks" and grid cells
+TODO: Implement the conversion logic
+*/
+class GridSpace(cells_x : Int, cells_y : Int, val cell_size : Int) {
+      var taken_cells = Array.ofDim[Boolean](cells_x, cells_y)
+
+      def cells_used(block_size : Int) : Int = {
+          return ((block_size : Double) / cell_size ceil) toInt
+      }
+
+      def block_fits(x : Int, y : Int, block_size : Int) : Boolean = {
+          return taken_cells(x)(y)
+      }
+
+      def take_block(x : Int, y : Int, block_size : Int) : Unit = {
+          taken_cells(x)(y) = true
+      }
+
+      def all_taken() : Boolean = {
+          return taken_cells.forall(arr => arr.forall(cell => cell))
+      }
+
+}
+
 class GridPlacement( paperSize : (Int, Int), qrcodes : List[Item] ) /* extends Placement*/ {
 
 	def generate() : List[Canvas] = {
@@ -31,25 +56,25 @@ class GridPlacement( paperSize : (Int, Int), qrcodes : List[Item] ) /* extends P
 
       val cells_x = width / cell_size
       val cells_y = height / cell_size
-      var taken_cells = Array.ofDim[Boolean](cells_x, cells_y)
+      var grid = new GridSpace(cells_x, cells_y, cell_size)
 
       val canvas = new Canvas(paperSize)
 
       var pages : List[Canvas] = List(canvas) 
 
       for (qrcode <- qrcodes) {
-        if (!taken_cells.forall(arr => arr.forall(cell => cell))) {
+        if (!grid.all_taken()) {
           var rand_x = 0
           var rand_y = 0
           do {
             rand_x = Random.nextInt(cells_x)
             rand_y = Random.nextInt(cells_y)
-          } while (taken_cells(rand_x)(rand_y))
+          } while (grid.block_fits(rand_x, rand_y, qrcode.size))
           canvas.add(qrcode, rand_x * cell_size, rand_y * cell_size)
           // todo: larger codes take more cells
-          taken_cells(rand_x)(rand_y) = true
+          grid.take_block(rand_x, rand_y, qrcode.size)
+          }
         }
-      }
       pages
 	}
 }
