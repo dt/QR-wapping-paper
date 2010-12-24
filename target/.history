@@ -1,0 +1,11 @@
+help
+eclipse 
+sbt eclipse
+eclipse
+run
+help
+build
+~run
+eclipsify
+ls
+eclipse
