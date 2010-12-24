@@ -12,14 +12,14 @@ abstract class Placement(canvas : Canvas) {
   def addQRCode(qrcode : qrcode) : Unit = {
     qrcodes = qrcodes :: qrcode
   }
-  
+
 
 }
 
 */
 
 class GridPlacement( paperSize : (Int, Int), qrcodes : List[Item] ) /* extends Placement*/ {
-	
+
 	def generate() : List[Canvas] = {
 
       val (width,height) = paperSize 
@@ -28,15 +28,15 @@ class GridPlacement( paperSize : (Int, Int), qrcodes : List[Item] ) /* extends P
       val smallest_qrcode = qrcodes min Ordering.by((_:Item).size)
       //make sure the cell size is the diagonal of the smalled "qrcode"
       val cell_size = math.sqrt(2 * math.pow(smallest_qrcode.size,2)) toInt
-      
+
       val cells_x = width / cell_size
       val cells_y = height / cell_size
       var taken_cells = Array.ofDim[Boolean](cells_x, cells_y)
 
       val canvas = new Canvas(paperSize)
-      
+
       var pages : List[Canvas] = List(canvas) 
-		
+
       for (qrcode <- qrcodes) {
         if (!taken_cells.forall(arr => arr.forall(cell => cell))) {
           var rand_x = 0
