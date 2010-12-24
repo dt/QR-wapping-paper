@@ -21,7 +21,7 @@ abstract class Placement(canvas : Canvas) {
 class GridPlacement(canvas :Canvas, qrcodes : List[Item] ) /* extends Placement*/ {
 	
 	def calculate() = {
-		
+
       val g = canvas.buffer getGraphics
 
       //A cell is the smallest unit on the grid. unit in pixels
@@ -29,13 +29,15 @@ class GridPlacement(canvas :Canvas, qrcodes : List[Item] ) /* extends Placement*
       //make sure the cell size is the diagonal of the smalled "qrcode"
       val cell_size = math.sqrt(2 * math.pow(smallest_qrcode.size,2)) toInt
       
-          
       val cells_x = canvas.x_dots / cell_size
       val cells_y = canvas.y_dots / cell_size
+      var taken_cells : Array.ofDim[Boolean](cells_x, cells_y)
+
+		
       for (qrcode <- qrcodes) {
         val rand_x = Random.nextInt(cells_x)
         val rand_y = Random.nextInt(cells_y)
-        canvas.add(qrcode.getImage, rand_x * cell_size, rand_y * cell_size)
+        canvas.add(qrcode, rand_x * cell_size, rand_y * cell_size)
       }
       /*
       var x_pos = 0
