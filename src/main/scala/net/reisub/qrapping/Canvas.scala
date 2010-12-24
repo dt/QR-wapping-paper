@@ -8,9 +8,10 @@ import java.awt.image.BufferedImage
 
 
 class Canvas( width:Double, height:Double, dpi : Int ) extends ImageObserver {
+	val margin = 0.5
 	
-	val x_dots = (dpi.toFloat * width) toInt
-	val y_dots = (dpi.toFloat * height) toInt
+	val x_dots = (dpi.toFloat * (width - margin)) toInt
+	val y_dots = (dpi.toFloat * (height - margin)) toInt
 
 	val buffer = new BufferedImage(x_dots, y_dots, BufferedImage.TYPE_INT_ARGB)
 	
