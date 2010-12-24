@@ -1,8 +1,16 @@
 package net.reisub.qrapping
+import 
 
-abstract class Placement(canvas_size : (x: Int, y: Int)) {
+case class OutOfRoomException extends Exception
 
-  def addQRCode(code : Item)
+
+
+abstract class Placement(canvas : Canvas) {
+  var things = List()
+
+  def addQRCode(qrcode : Item) : Unit = {
+    things = things :: qrcode
+  }
 
 }
 
