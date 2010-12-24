@@ -7,14 +7,19 @@ import java.awt.image.ImageObserver
 import java.awt.image.BufferedImage
 
 
-class Canvas( width:Float, height:Float, dpi : Int ) extends ImageObserver {
+class Canvas( width:Double, height:Double, dpi : Int ) extends ImageObserver {
 	
 	val x_dots = (dpi.toFloat * width) toInt
 	val y_dots = (dpi.toFloat * height) toInt
 
 	val buffer = new BufferedImage(x_dots, y_dots, BufferedImage.TYPE_INT_ARGB)
 	
-	def write(format: String,  filename: String) {
+	def add(image:Image, x_pos : Int, y_pos : Int) = {
+		buffer getGraphics() drawImage(image, x_pos, y_pos, this)
+
+	}
+	
+	def write(format: String,  filename: String) = {
 			ImageIO.write(buffer, "png", new File("test.png"))
 	}
 
