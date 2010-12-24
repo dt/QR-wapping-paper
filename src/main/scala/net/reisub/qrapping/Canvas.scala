@@ -8,19 +8,16 @@ import java.awt.image.BufferedImage
 import java.awt.geom.AffineTransform
 import java.awt.image.AffineTransformOp
 
-class Canvas( width:Double, height:Double, dpi : Int ) extends ImageObserver {
-	val margin = 0.5
+class Canvas( paperSize : (Int,Int) ) extends ImageObserver {
+	val (width, height) = paperSize
 	
-	val x_dots = (dpi.toFloat * (width - margin)) toInt
-	val y_dots = (dpi.toFloat * (height - margin)) toInt
-
-	val buffer = new BufferedImage(x_dots, y_dots, BufferedImage.TYPE_INT_ARGB)
+	val buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 	
 	def add(item:Item, x_pos : Int, y_pos : Int) = {
 		val image = item.getImage
 		val transform = new AffineTransform()
 		
-		transform.rotate(Math.toRadians(Math.random * 360), image.getWidth()/2, image.getHeight()/2)
+		transform.rotate(Canvas.angles.draw, image.getWidth()/2, image.getHeight()/2)
 		
 		val op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR)
 				
@@ -35,4 +32,14 @@ class Canvas( width:Double, height:Double, dpi : Int ) extends ImageObserver {
   def imageUpdate(img:Image, infoflags : Int, x :Int, y:Int, width:Int, height:Int ) : Boolean = {
    false
   }
+}
+
+object Canvas {
+	val angles = new ShuffleBag[Int]
+	
+	angles.addMany(0, 4)
+	angles.add(10)
+	angles.add(30)
+	angles.addMany(45, 2)
+	angles.add(70)
 }
