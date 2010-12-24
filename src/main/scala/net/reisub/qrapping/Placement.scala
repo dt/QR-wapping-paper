@@ -33,7 +33,6 @@ class GridPlacement(canvas :Canvas, qrcodes : List[Item] ) /* extends Placement*
       val cells_y = canvas.y_dots / cell_size
       var taken_cells = Array.ofDim[Boolean](cells_x, cells_y)
 
-		
       for (qrcode <- qrcodes) {
         if (!taken_cells.forall(arr => arr.forall(cell => cell))) {
           var rand_x = 0
@@ -42,7 +41,9 @@ class GridPlacement(canvas :Canvas, qrcodes : List[Item] ) /* extends Placement*
             rand_x = Random.nextInt(cells_x)
             rand_y = Random.nextInt(cells_y)
           } while (taken_cells(rand_x)(rand_y))
+
           canvas.add(qrcode, rand_x * cell_size, rand_y * cell_size)
+          // todo: larger codes take more cells
           taken_cells(rand_x)(rand_y) = true
         }
       }
