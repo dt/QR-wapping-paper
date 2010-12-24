@@ -18,7 +18,7 @@ abstract class Placement(canvas : Canvas) {
 
 class GridPlacement(canvas :Canvas, items : List[Item] ) /* extends Placement*/ {
 	
-	def calculatePlacement() = {
+	def calculate() = {
 		
 	val g = canvas.buffer getGraphics
 		
