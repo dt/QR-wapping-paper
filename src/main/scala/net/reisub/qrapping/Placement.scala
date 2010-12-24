@@ -46,6 +46,7 @@ class GridPlacement( paperSize : (Int, Int), qrcodes : List[Item] ) /* extends P
             rand_y = Random.nextInt(cells_y)
           } while (taken_cells(rand_x)(rand_y))
           canvas.add(qrcode, rand_x * cell_size, rand_y * cell_size)
+          // todo: larger codes take more cells
           taken_cells(rand_x)(rand_y) = true
         }
       }
