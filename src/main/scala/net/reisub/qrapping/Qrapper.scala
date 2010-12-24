@@ -12,6 +12,11 @@ object Qrapper {
 	
 	val items = things.map( content => new Item(size, content))
 
+	val placement = new GridPlacement(canvas, items)
+	
+	placement calculate()
+	
+	canvas write("png", "test.png")
 	
 	println("Done")
   }
