@@ -1,8 +1,6 @@
 package net.reisub.qrapping
 
-import com.google.zxing._
-import qrcode._
-import client.j2se._
+
 import java.io.File
 import javax.imageio.ImageIO;
 
@@ -25,21 +23,15 @@ object Qrapper extends ImageObserver {
 	
 	val canvas = new BufferedImage(x_dots, y_dots, BufferedImage.TYPE_INT_ARGB);
 	
-	val writer = new QRCodeWriter
-
-	val qrcodes = things.map(s => 
-	  {
-		val matrix = writer encode(s, BarcodeFormat.QR_CODE, size, size, null)
-		MatrixToImageWriter toBufferedImage(matrix)
-	  }
-	)
 	
 	val g = canvas getGraphics
 	
-	var x_pos = 0;
-	var y_pos = 0;
+	val items = things.map( content => new Item(size, content))
 	
-	for(qrcode <- qrcodes) {
+	var x_pos = 0
+	var y_pos = 0
+	
+	for(qrcode <- items) {
 		x_pos = x_pos + size
 		
 		if(x_pos > x_dots) {
@@ -47,7 +39,7 @@ object Qrapper extends ImageObserver {
 			y_pos = y_pos + size
 		}
 			
-		g.drawImage(qrcode, x_pos, y_pos, this)
+		g.drawImage(qrcode.generate, x_pos, y_pos, this)
 	}
 	
 	ImageIO.write(canvas, "png", new File("test.png"))
