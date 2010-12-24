@@ -41,7 +41,7 @@ class GridPlacement(canvas :Canvas, qrcodes : List[Item] ) /* extends Placement*
           do {
             rand_x = Random.nextInt(cells_x)
             rand_y = Random.nextInt(cells_y)
-          } while (!taken_cells(rand_x)(rand_y))
+          } while (taken_cells(rand_x)(rand_y))
           canvas.add(qrcode, rand_x * cell_size, rand_y * cell_size)
           taken_cells(rand_x)(rand_y) = true
         }
