@@ -5,7 +5,7 @@ import scala.util.control.Breaks._
 
 class GridPlacement( paperSize : (Int, Int), items : List[Item] ) /* extends Placement*/ {
 
-  val tries = 40
+  val tries = 30
 
 	
   def generate() : List[Canvas] = {
@@ -49,7 +49,7 @@ class GridPlacement( paperSize : (Int, Int), items : List[Item] ) /* extends Pla
 		    	for(i <- 0 until tries) {
 		          val rand_x = Random.nextInt(cells_x)
 		          val rand_y = Random.nextInt(cells_y)
-		          print("\tTrying "+rand_x+","+rand_y+"...")
+		          print("  Trying "+rand_x+","+rand_y+"...")
 		          
 		          if( occupied.slice(rand_y, rand_y + cells).map(  
 		        		  r => r.slice(rand_x, rand_x + cells).count(c => !c )
@@ -57,13 +57,13 @@ class GridPlacement( paperSize : (Int, Int), items : List[Item] ) /* extends Pla
 		        	  
 		        	println(Console.GREEN + "Fits!" + Console.WHITE)
 		        	
-		            println("\t\tClaiming "+q(cells)+" cells:")
+		            println("    Claiming "+q(cells)+" cells:")
 		          
 		            page.add(qrcode, rand_x * cell_size, rand_y * cell_size)
 		            for (y <- rand_y until math.min(rand_y+cells, cells_y) ) {
 		        	  for (x <- rand_x until math.min(rand_x+cells, cells_x) ) {
 		        		occupied(y)(x) = true
-		        		println("\t\t\t("+x+","+y+")")
+		        		println("      ("+x+","+y+")")
 		        	  }
 		            }
 		        	stuck = false
@@ -74,7 +74,7 @@ class GridPlacement( paperSize : (Int, Int), items : List[Item] ) /* extends Pla
 		            println("Nope")
 		          }
 		      }
-	    	  println("\tGoing to next page...")
+	    	  println("  Going to next page...")
 	        }
 	    	
 	    	stuck = true
