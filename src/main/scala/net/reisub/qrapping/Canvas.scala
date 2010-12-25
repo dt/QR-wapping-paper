@@ -23,7 +23,7 @@ class Canvas( paperSize : (Int,Int) ) extends ImageObserver {
 			ImageIO.write(buffer, "png", new File(filename))
 	}
 
-	  
+
   def imageUpdate(img:Image, infoflags : Int, x :Int, y:Int, width:Int, height:Int ) : Boolean = {
    false
   }
