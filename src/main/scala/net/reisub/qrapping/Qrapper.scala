@@ -3,12 +3,12 @@ package net.reisub.qrapping
 object Qrapper {
   
   val things = List (
+   "http://www.youtube.com/watch?v=oHg5SJYRHA0",
+
     "Oh-oh-oh-oh-oooh!",
     "Oh-oh-oooh-oh-oh!",
     "Caught in a bad romance",
-    
-    "http://www.youtube.com/watch?v=oHg5SJYRHA0",
-    
+       
     "Rah-rah-ah-ah-ah!",
     "Roma-Roma-ma-ah!",
     "Ga-ga-ooh-la-la!",
@@ -18,8 +18,6 @@ object Qrapper {
     "Roma-Roma-ma-ah!",
     "Ga-ga-ooh-la-la!",
     "Want your bad romance",
-    
-    "Hello World",
     
     "I want your ugly",
     "I want your disease",
@@ -37,13 +35,14 @@ object Qrapper {
   lazy val dpi = 300;
 
   lazy val (small   , med,      large,   huge) = 
-	  	   (0.75 in , 1.25 in , 2.25 in, 2.75 in)
+           (0.75 in , 1.25 in , 2.25 in, 2.75 in)
   
-  lazy val frequencies = (10, 7, 2, 1)
+  lazy val frequencies = 
+           (10,       7,        2,       1)
     
   lazy val rotation = on
   
-  
+  lazy val verbose = on
   
   def main(args : Array[String]) : Unit = {
     println()
@@ -56,9 +55,9 @@ object Qrapper {
     
     val (small_count, med_count, large_count, huge_count) = frequencies
     val sizes = new ShuffleBag[Int]()
-    sizes.addMany( huge , huge_count)
+    sizes.addMany( huge  , huge_count)
     sizes.addMany( large , large_count)
-    sizes.addMany( med , med_count)
+    sizes.addMany( med   , med_count)
     sizes.addMany( small , small_count)
       
     val items = things.map( content => new Item(sizes.draw(), content))
