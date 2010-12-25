@@ -36,9 +36,10 @@ object Qrapper {
 
   lazy val dpi = 300;
 
-  lazy val (small, med, large, huge) = (0.75 in, 1.25 in, 2.25 in, 2.75 in)
+  lazy val (small   , med,      large,   huge) = 
+	  	   (0.75 in , 1.25 in , 2.25 in, 2.75 in)
   
-  lazy val (small_count, med_count, large_count, huge_count) = (10, 7, 2, 1)
+  lazy val frequencies = (10, 7, 2, 1)
     
   lazy val rotation = on
   
@@ -52,8 +53,10 @@ object Qrapper {
     println("Paper is "+paper._1+" by "+paper._2)
       
     println("QR Code sizes are "+ small + "px, "+med+"px, and "+large+"px.")
-      
+    
+    val (small_count, med_count, large_count, huge_count) = frequencies
     val sizes = new ShuffleBag[Int]()
+    sizes.addMany( huge , huge_count)
     sizes.addMany( large , large_count)
     sizes.addMany( med , med_count)
     sizes.addMany( small , small_count)
