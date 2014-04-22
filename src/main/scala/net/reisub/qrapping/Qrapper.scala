@@ -3,30 +3,6 @@ package net.reisub.qrapping
 object Qrapper {
   
   val things = List (
-   "http://www.youtube.com/watch?v=oHg5SJYRHA0",
-
-    "Oh-oh-oh-oh-oooh!",
-    "Oh-oh-oooh-oh-oh!",
-    "Caught in a bad romance",
-       
-    "Rah-rah-ah-ah-ah!",
-    "Roma-Roma-ma-ah!",
-    "Ga-ga-ooh-la-la!",
-    "Want your bad romance",
-    
-    "Rah-rah-ah-ah-ah!",
-    "Roma-Roma-ma-ah!",
-    "Ga-ga-ooh-la-la!",
-    "Want your bad romance",
-    
-    "I want your ugly",
-    "I want your disease",
-    "I want your everything",
-    "As long as it's free",
-    "I want your love",
-    "Love-love-love",
-    "I want your love",
-    
     "https://github.com/tinystatemachine/Qrapping-Paper"    
   )
 
