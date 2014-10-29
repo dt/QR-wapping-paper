@@ -3,7 +3,7 @@ package net.reisub.qrapping
 object Qrapper {
   
   val things = List (
-    "https://github.com/tinystatemachine/Qrapping-Paper"    
+    "https://github.com/dt/QR-wapping-paper"    
   )
 
   lazy val paper = (8.5 inches, 11 inches)
